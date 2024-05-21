@@ -47,7 +47,20 @@ inputs:
   sqlMode:
     description: 'The sql modes, fx. NO_ENGINE_SUBSTITUTION'
     required: false
+    default: 'NO_ENGINE_SUBSTITUTION'
+  explicitDefaultsForTimestamp:
+    description: 'The --explicit-defaults-for-timestamp flag'
+    required: false
     default: ''
+  characterSetFilesystem:
+    description: 'The --character-set-filesystem flag'
+    required: false
+    default: ''
+  innodbAutoIncLockMode:
+    description: 'The --innodb_autoinc_lock_mode flag'
+    required: false
+    default: ''
+
 runs:
   using: 'docker'
   image: 'Dockerfile'

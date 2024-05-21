@@ -18,6 +18,7 @@ if [ -n "$INPUT_DATABASE" ]; then
   cmd="$cmd -e MYSQL_DATABASE=$INPUT_DATABASE"
 fi
 
+
 cmd="$cmd -d -p $INPUT_HOSTPORT:$INPUT_CONTAINERPORT"
 cmd="$cmd --hostname=mysql"
 cmd="$cmd --name=mysql"
@@ -25,7 +26,22 @@ cmd="$cmd mysql:$INPUT_VERSION"
 cmd="$cmd --port=$INPUT_CONTAINERPORT"
 cmd="$cmd --character-set-server=$INPUT_CHARACTERSET"
 cmd="$cmd --collation-server=$INPUT_COLLATION"
-cmd="$cmd --sql-mode=NO_ENGINE_SUBSTITUTION"
+
+if [ -n "$INPUT_SQLMODE" ]; then
+  cmd="$cmd --sql-mode=$INPUT_SQLMODE"
+fi
+
+if [ -n "$INPUT_EXPLICITDEFAULTSFORTIMESTAMP" ]; then
+  cmd="$cmd --explicit-defaults-for-timestamp=$INPUT_EXPLICITDEFAULTSFORTIMESTAMP"
+fi
+
+if [ -n "$INPUT_CHARACTERSETFILESYSTEM" ]; then
+  cmd="$cmd --character-set-filesystem=$INPUT_CHARACTERSETFILESYSTEM"
+fi
+
+if [ -n "$INPUT_INNODB_AUTOINC_LOCK_MODE" ]; then
+  cmd="$cmd --innodb_autoinc_lock_mode=$INPUT_CHARACTERSETFILESYSTEM"
+fi
 
 echo "CMD: $cmd"
 
